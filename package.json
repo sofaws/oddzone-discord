@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "babel-node": "babel-node --presets=latest",
-    "start": "nodemon --exec npm run babel-node -- ./index.js",
-    "build": "babel src -d dist"
+    "watch": "nodemon --exec npm run babel-node -- ./src/index.js",
+    "start": "babel src -d dist && node dist/index.js"
   },
   "author": "",
   "license": "ISC",
