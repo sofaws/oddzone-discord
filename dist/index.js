@@ -63,9 +63,11 @@ function waitFirstNumber(msg) {
 
 function waitNumbers(msg) {
     var party = AllParty[_Party2.default.waitNumbers(AllParty, msg.author.id)];
+    console.log(party.number);
+    console.log(msg.content);
     if (isNaN(msg.content)) {
         msg.reply('Un nombre petit con!');
-    } else if (msg.content > party.number) {
+    } else if (parseInt(msg.content) > parseInt(party.number)) {
         client.channels.get(party.channel).send('<@' + msg.author.id + '> essaie de tricher et donne un chiffre hors limite :O, on attends tous qu\'il recommence...!');
     } else if (!party.response) {
         party.response = msg.content;
@@ -74,13 +76,15 @@ function waitNumbers(msg) {
         if (party.response === msg.content) {
             client.channels.get(party.channel).send('<@' + party.adversary + '> est dans le mal, les deux ont donn\xE9 un ' + msg.content + '. Il doit respecter le d\xE9fi : ' + party.defi + ' ');
             party.state = "END";
+            AllParty.splice(_Party2.default.waitNumbers(AllParty, msg.author.id), 1);
         } else {
             if (party.number <= 10) {
                 party.state = "COUNTER";
-                party.response = null;
                 client.channels.get(party.channel).send(' un ' + msg.content + ' et un ' + party.response + ' \xE7a ne colle pas ! Mais <@' + party.adversary + '> a le droit \xE0 un contre car il a port\xE9 ses couilles !! J\'attends vos nouveaux nombres en MP!');
+                party.response = null;
             } else {
                 party.state = "END";
+                AllParty.splice(_Party2.default.waitNumbers(AllParty, msg.author.id), 1);
                 client.channels.get(party.channel).send('<@' + party.adversary + '> s\'en sort bien ! un ' + msg.content + ' et un ' + party.response + ' \xE7a ne colle pas ! ');
             }
         }
@@ -91,7 +95,7 @@ function waitNumbersInCounter(msg) {
     var party = AllParty[_Party2.default.waitNumbersInCounter(AllParty, msg.author.id)];
     if (isNaN(msg.content)) {
         msg.reply('Un nombre petit con!');
-    } else if (msg.content > party.number) {
+    } else if (parseInt(msg.content) > parseInt(party.number)) {
         client.channels.get(party.channel).send('<@' + msg.author.id + '> essaie de tricher et donne un chiffre hors limite :O, on attends tous qu\'il recommence...!');
     } else if (!party.response) {
         party.response = msg.content;
@@ -100,8 +104,10 @@ function waitNumbersInCounter(msg) {
         if (party.response === msg.content) {
             client.channels.get(party.channel).send('<@' + party.owner + '> est dans le mal, les deux ont donn\xE9 un ' + msg.content + ' lors du contre. Il doit respecter le d\xE9fi : ' + party.defi + ' ');
             party.state = "END";
+            AllParty.splice(_Party2.default.waitNumbers(AllParty, msg.author.id), 1);
         } else {
             party.state = "END";
+            AllParty.splice(_Party2.default.waitNumbers(AllParty, msg.author.id), 1);
             client.channels.get(party.channel).send('<@' + party.owner + '> s\'en sort bien, le contre aurait pu faire mal ! un ' + msg.content + ' et un ' + party.response + ' \xE7a ne colle pas ! ');
         }
     }
