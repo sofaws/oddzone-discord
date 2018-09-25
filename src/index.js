@@ -1,6 +1,6 @@
 import Party from './Party';
-import S from "src/utils/StringUtils";
-import {BEGIN_PARTY, COMMONS, WAIT_FIRST_NUMBER, WAIT_NUMBERS, WAIT_NUMBERS_COUNTER} from "src/constants/string";
+import S from "./utils/StringUtils";
+import {BEGIN_PARTY, COMMONS, WAIT_FIRST_NUMBER, WAIT_NUMBERS, WAIT_NUMBERS_COUNTER} from "./constants/string";
 const Discord = require("discord.js");
 const client = new Discord.Client();
 

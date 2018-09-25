@@ -4,11 +4,11 @@ var _Party = require("./Party");
 
 var _Party2 = _interopRequireDefault(_Party);
 
-var _StringUtils = require("src/utils/StringUtils");
+var _StringUtils = require("./utils/StringUtils");
 
 var _StringUtils2 = _interopRequireDefault(_StringUtils);
 
-var _string = require("src/constants/string");
+var _string = require("./constants/string");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
